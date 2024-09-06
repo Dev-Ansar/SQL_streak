@@ -1,0 +1,31 @@
+Data Trends Analysis (September 5, 2024)
+Scenario:
+You work for an e-commerce platform. Your manager wants to analyze the daily order trends by showing the cumulative number of orders placed each day.
+
+Query:
+Write a SQL query to calculate the daily number of orders and the cumulative total of orders up to each day.
+
+
+solution: 
+
+SELECT order_date,
+       COUNT(order_id) AS daily_orders,
+       SUM(COUNT(order_id)) OVER (ORDER BY order_date) AS cumulative_orders
+FROM orders_table
+GROUP BY order_date
+ORDER BY order_date;
+
+
+Explanation:
+COUNT(order_id): Counts the number of orders per day.
+SUM(COUNT(order_id)) OVER (ORDER BY order_date): Calculates the cumulative total of orders. 
+The OVER (ORDER BY order_date) part creates a window of rows ordered by order_date and sums the counts up to the current row.
+
+
+Key Takeaways from Day 1 (September 5, 2024):
+Understanding Cumulative Totals:
+Cumulative refers to a running total of values over time. In today’s problem, the goal was to calculate the cumulative number of orders placed up to each day.
+
+Importance of Window Functions:
+The SUM() OVER() window function was used to compute the cumulative sum of daily orders. This allows you to maintain running totals across ordered rows.
+
